@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+  <script src="web-component/product-listing.js"></script>
+  <script src="web-component/product-details.js"></script>
+  <style>
+    #listing {
+      display: block;
+    }
+    #details {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  Hello world
+  <product-listing id="listing"></product-listing>
+  <product-details id="details"></product-details>
+  <script>
+    const listing = document.querySelector("#listing");
+    const details = document.querySelector("#details");
+
+    listing.addEventListener("product-selected", e => {
+      details.product = e.detail.id;
+    });
+  </script>
+</body>
