@@ -3,7 +3,6 @@ package org.vaadin.artur.microfront.productlisting;
 import com.vaadin.flow.component.WebComponentExporter;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.ironlist.IronList;
 import com.vaadin.flow.component.webcomponent.WebComponent;
 
 import elemental.json.Json;

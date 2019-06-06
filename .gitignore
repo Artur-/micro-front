@@ -1,1 +1,7 @@
+.classpath
+.project
+.vscode
+.settings
+node_modules
 target
+package-lock.json

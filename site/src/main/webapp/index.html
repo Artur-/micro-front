@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <head>
-  <script src="web-component/product-listing.js"></script>
-  <script src="web-component/product-details.js"></script>
+  <script type="module" src="product-details/web-component/product-details.js"></script>
+  <script type="module" src="product-listing/web-component/product-listing.js"></script>
+  <script type="module" src="bundle/VAADIN/build/vaadin-bundle-2d3f3ef2a0d4fa6ff852.cache.js"></script>
   <style>
     #listing {
       display: block;
+      border: 1px dashed black;
+      margin: 1em;
     }
     #details {
       display: block;
+      border: 1px dashed black;
+      margin: 1em;
     }
   </style>
 </head>
 <body>
-  Hello world
+  This is a micro UI
   <product-listing id="listing"></product-listing>
   <product-details id="details"></product-details>
   <script>
@@ -21,6 +26,7 @@
 
     listing.addEventListener("product-selected", e => {
       details.product = e.detail.id;
+      details._sync("product", details.product);
     });
   </script>
 </body>

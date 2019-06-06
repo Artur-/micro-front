@@ -25,12 +25,14 @@ public class ProductDetailsView extends Div {
 
     }
 
+    private Div header = new Div();
     private Div name = new Div();
     private Div weight = new Div();
     private Div price = new Div();
 
     public ProductDetailsView() {
-        add(name, weight, price);
+        header.setText("Product Details");
+        add(header,name, weight, price);
     }
 
     public void setProduct(int id) {

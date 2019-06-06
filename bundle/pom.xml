@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -7,14 +7,19 @@
         <artifactId>micro-front</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>product-listing</artifactId>
-    <name>product-listing</name>
+    <artifactId>bundle</artifactId>
+    <name>bundle</name>
     <packaging>war</packaging>
+
+    <properties>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
+            <!-- Cannot be provided unless https://github.com/vaadin/flow/issues/5801 is resolved -->
+            <!-- <scope>provided</scope> -->
         </dependency>
     </dependencies>
 
