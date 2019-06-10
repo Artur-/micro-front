@@ -1,0 +1,1 @@
+import './VAADIN/build/#bundleFileName#';

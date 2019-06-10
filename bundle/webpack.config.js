@@ -5,6 +5,7 @@
  * It's not overwritten when it already exists.
  */
 const fs = require('fs');
+const replaceInFile = require("replace-in-file");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BabelMultiTargetPlugin } = require('webpack-babel-multi-target-plugin');
 
@@ -25,12 +26,13 @@ const build = 'build';
 const buildFolder = `${mavenOutputFolderForFlowBundledFiles}/${build}`;
 // file which is used by flow to read templates for server `@Id` binding
 const statsFile = `${buildFolder}/stats.json`;
+const indexNoCacheFile = `src/main/webapp/index.nocache.js`;
 // make sure that build folder exists before outputting anything
 const mkdirp = require('mkdirp');
 mkdirp(buildFolder);
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   context: frontendFolder,
   entry: {
     bundle: fileNameOfTheFlowGeneratedMainEntryPoint
@@ -94,9 +96,18 @@ module.exports = {
     function (compiler) {
       compiler.hooks.afterEmit.tapAsync("FlowIdPlugin", (compilation, done) => {
         console.log("Emitted " + statsFile)
+          if (err) throw err;
+        });
+        const options = {
+          files: indexNoCacheFile,
+          from: /#bundleFileName#/g,
+          to: bundleFilename,
+        };
+        replaceInFile(options);
+
+
         fs.writeFile(statsFile, JSON.stringify(compilation.getStats().toJson(), null, 1), done);
       });
-    },
 
     // Copy webcomponents polyfills. They are not bundled because they
     // have its own loader based on browser quirks.
