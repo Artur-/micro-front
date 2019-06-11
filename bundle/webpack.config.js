@@ -96,6 +96,8 @@ module.exports = {
     function (compiler) {
       compiler.hooks.afterEmit.tapAsync("FlowIdPlugin", (compilation, done) => {
         console.log("Emitted " + statsFile)
+        const bundleFilename = compilation.getStats().toJson().assetsByChunkName.bundle.replace(/.*\//,"");
+        fs.copyFile('index.nocache.js', indexNoCacheFile, (err) => {
           if (err) throw err;
         });
         const options = {
@@ -108,6 +110,7 @@ module.exports = {
 
         fs.writeFile(statsFile, JSON.stringify(compilation.getStats().toJson(), null, 1), done);
       });
+    },
 
     // Copy webcomponents polyfills. They are not bundled because they
     // have its own loader based on browser quirks.
