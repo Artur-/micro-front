@@ -97,6 +97,7 @@ module.exports = {
       compiler.hooks.afterEmit.tapAsync("FlowIdPlugin", (compilation, done) => {
         console.log("Emitted " + statsFile)
         const bundleFilename = compilation.getStats().toJson().assetsByChunkName.bundle.replace(/.*\//,"");
+        fs.mkdirSync("src/main/webapp");
         fs.copyFile('index.nocache.js', indexNoCacheFile, (err) => {
           if (err) throw err;
         });
