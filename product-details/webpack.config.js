@@ -18,7 +18,7 @@ const frontendFolder = `${baseDir}/frontend`;
 fileNameOfTheFlowGeneratedMainEntryPoint = require('path').resolve(__dirname, 'target/frontend/generated-flow-imports.js');
 mavenOutputFolderForFlowBundledFiles = require('path').resolve(__dirname, 'target/classes/META-INF/VAADIN');
 ////////////////////////////////////////
-
+const filteredFileNameOfTheFlowGeneratedMainEntryPoint = fileNameOfTheFlowGeneratedMainEntryPoint+'-filtered.js';
 // public path for resources, must match Flow VAADIN_BUILD
 const build = 'build';
 // public path for resources, must match the request used in flow to get the /build/stats.json file
@@ -38,7 +38,7 @@ module.exports = {
   mode: 'production',
   context: frontendFolder,
   entry: {
-    bundle: fileNameOfTheFlowGeneratedMainEntryPoint
+    bundle: filteredFileNameOfTheFlowGeneratedMainEntryPoint
   },
 
   output: {
@@ -97,6 +97,11 @@ module.exports = {
 
     // Generates the stats file for flow `@Id` binding.
     function (compiler) {
+      compiler.hooks.beforeRun.tap('Filter out external deps', (compilation) => {
+        const original = fs.readFileSync(fileNameOfTheFlowGeneratedMainEntryPoint, 'utf8');
+        const filtered = original.split("\n").filter(row => row.startsWith("import '."));
+        fs.writeFileSync(filteredFileNameOfTheFlowGeneratedMainEntryPoint, filtered);
+      });
       compiler.hooks.afterEmit.tapAsync("FlowIdPlugin", (compilation, done) => {
         console.log("Emitted " + statsFile)
         fs.writeFile(statsFile, JSON.stringify(compilation.getStats().toJson(), null, 1), done);
