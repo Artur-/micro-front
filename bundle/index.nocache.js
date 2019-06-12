@@ -1,1 +1,1 @@
-import './VAADIN/build/#bundleFileName#';
+import './#bundleFileName#';

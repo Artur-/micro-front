@@ -7,6 +7,7 @@
 const fs = require('fs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BabelMultiTargetPlugin } = require('webpack-babel-multi-target-plugin');
+const replaceInFile = require("replace-in-file");
 
 const path = require('path');
 const baseDir = path.resolve(__dirname);
@@ -29,6 +30,7 @@ const buildFolder = `${mavenOutputFolderForFlowBundledFiles}/${build}`;
 const confFolder = `${mavenOutputFolderForFlowBundledFiles}/${config}`;
 // file which is used by flow to read templates for server `@Id` binding
 const statsFile = `${confFolder}/stats.json`;
+const indexNoCacheFile = `${buildFolder}/index.nocache.js`;
 // make sure that build folder exists before outputting anything
 const mkdirp = require('mkdirp');
 mkdirp(buildFolder);
@@ -100,6 +102,18 @@ module.exports = {
       compiler.hooks.afterEmit.tapAsync("FlowIdPlugin", (compilation, done) => {
         console.log("Emitted " + statsFile)
         fs.writeFile(statsFile, JSON.stringify(compilation.getStats().toJson(), null, 1), done);
+
+        const bundleFilename = compilation.getStats().toJson().assetsByChunkName.bundle.replace(/.*\//,"");
+        fs.copyFile('index.nocache.js', indexNoCacheFile, (err) => {
+          if (err) throw err;
+        });
+        const options = {
+          files: indexNoCacheFile,
+          from: /#bundleFileName#/g,
+          to: bundleFilename,
+        };
+        replaceInFile(options);
+
       });
     },
 
