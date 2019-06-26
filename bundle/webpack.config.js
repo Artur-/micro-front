@@ -20,12 +20,13 @@ module.exports = merge(flowDefaults, {
         fs.copyFile("index.nocache.js", indexNoCacheFile, err => {
           if (err) throw err;
         });
+        console.log("Using bundle name "+bundleFilename+ " to update "+indexNoCacheFile);
         const options = {
           files: indexNoCacheFile,
           from: /#bundleFileName#/g,
           to: bundleFilename
         };
-        replaceInFile(options);
+        replaceInFile.sync(options);
       });
     }
   ]
