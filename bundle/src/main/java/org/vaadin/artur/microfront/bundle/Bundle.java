@@ -1,4 +1,4 @@
-package main.java.org.vaadin.artur.microfront.bundle;
+package org.vaadin.artur.microfront.bundle;
 
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -37,6 +37,8 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.router.Route;
 
+import org.vaadin.artur.github_corner.GitHubCorner;
+
 // Must have @Route for Flow to scan it
 @Route("")
 public class Bundle {
@@ -62,6 +64,7 @@ public class Bundle {
     private DatePicker datepicker = new DatePicker();
     private TextField textfield = new TextField();
     private MenuBar menubar = new MenuBar();
+    private GitHubCorner gitHubCorner = new GitHubCorner("foo");
     private CustomField customfield = new CustomField() {
 
         @Override
