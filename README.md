@@ -6,4 +6,4 @@ mvn install
 cp */target/*.war ~/your/tomcat/webapps
 ```
 
-Open http://localhost:8080/index.html
+Open http://localhost:8080/site/index.html

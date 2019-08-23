@@ -18,7 +18,7 @@
     </dependencies>
 
     <build>
-        <finalName>ROOT</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <!-- Jetty plugin for easy testing without a server -->
             <plugin>
