@@ -32,6 +32,7 @@ public class ProductListingView extends Div {
         list.addItemClickListener(e -> {
             JsonObject data = Json.createObject();
             data.put("id", e.getItem().getId());
+            data.put("image", e.getItem().getImage());
             webComponent.fireEvent("product-selected", data);
         });
     }

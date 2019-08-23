@@ -5,9 +5,10 @@
     window.Vaadin.Flow = window.Vaadin.Flow || {};
   </script>
 
-  <script type="module" src="product-details/web-component/product-details.js"></script>
-  <script type="module" src="product-listing/web-component/product-listing.js"></script>
-  <script type="module" src="bundle/VAADIN/build/index.nocache.js"></script>
+  <script type="module" src="/product-details/web-component/product-details.js"></script>
+  <script type="module" src="/product-listing/web-component/product-listing.js"></script>
+  <script type="module" src="/product-image/product-image.js"></script>
+  <script type="module" src="/bundle/VAADIN/build/index.nocache.js"></script>
   <style>
     #listing {
       display: block;
@@ -17,6 +18,10 @@
     #details {
       display: block;
       border: 1px dashed black;
+      margin: 1em;
+    }
+    #image {
+      width: calc(100% - 2em);
       margin: 1em;
     }
     github-corner svg {
@@ -29,12 +34,14 @@
   <github-corner><a target="_blank" href="https://github.com/Artur-/micro-front"></a></github-corner>
   <product-listing id="listing"></product-listing>
   <product-details id="details"></product-details>
+  <product-image id="image"></product-image>
   <script>
     const listing = document.querySelector("#listing");
     const details = document.querySelector("#details");
-
+    const image = document.querySelector("#image");
     listing.addEventListener("product-selected", e => {
       details.product = e.detail.id;
+      image.product = e.detail;
     });
   </script>
 </body>
