@@ -31,8 +31,12 @@ public class ProductDetailsView extends Div {
     private Div price = new Div();
 
     public ProductDetailsView() {
+        Div label = new Div();
+        label.getElement().getStyle().set("border-bottom","1px solid black");
+        label.setText("Implemented using server side Java in " + getClass().getSimpleName() + ".java and deployed as /product-details");
+        add(label);
         header.setText("Product Details");
-        add(header,name, weight, price);
+        add(header, name, weight, price);
     }
 
     public void setProduct(int id) {

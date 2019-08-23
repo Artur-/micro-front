@@ -20,7 +20,8 @@ class ProductImage extends LitElement {
         `;
     }
     render() {
-        return html`<div>
+        return html`<div style="border-bottom: 1px solid black">
+        Implemented using LitElement in product-image.js and deployed as /product-image/product-image.js<br>
         <img src="${this.product ? this.product.image : ""}">
         </div>`;
     }
